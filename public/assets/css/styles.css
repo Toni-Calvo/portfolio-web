@@ -1,0 +1,34 @@
+body {
+    background-color: #292B2F;
+    font-family: sans-serif; 
+}
+
+.contact-img {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+    padding: 20px;
+}
+
+.contact-img figure {
+    margin: 0;
+    text-align: center;
+    padding: 10px;
+}
+
+.contact-img img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.contact-img > a {
+    display: inline-block;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.contact-img > a:hover {
+    transform: scale(1.1);
+}
