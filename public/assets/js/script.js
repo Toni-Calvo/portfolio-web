@@ -60,4 +60,42 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = targetPage;
         })
     })
+
+    // Function to check if text wraps and toggle underline
+    const checkTextWrapping = () => {
+        const sectionTitles = document.querySelectorAll('.section-title');
+        
+        sectionTitles.forEach(title => {
+            // Create a temporary element to measure single-line width
+            const tempElement = document.createElement('span');
+            tempElement.style.cssText = `
+                position: absolute;
+                visibility: hidden;
+                white-space: nowrap;
+                font-size: ${getComputedStyle(title).fontSize};
+                font-family: ${getComputedStyle(title).fontFamily};
+                font-weight: ${getComputedStyle(title).fontWeight};
+                line-height: ${getComputedStyle(title).lineHeight};
+            `;
+            tempElement.textContent = title.textContent;
+            document.body.appendChild(tempElement);
+            
+            const singleLineWidth = tempElement.offsetWidth;
+            const availableWidth = title.offsetWidth;
+            
+            // Remove temp element
+            document.body.removeChild(tempElement);
+            
+            // If text would be wider than available space, it wraps
+            if (singleLineWidth > availableWidth) {
+                title.classList.add('text-wrapped');
+            } else {
+                title.classList.remove('text-wrapped');
+            }
+        });
+    };
+
+    // Check on load and resize
+    checkTextWrapping();
+    window.addEventListener('resize', checkTextWrapping);
 })
