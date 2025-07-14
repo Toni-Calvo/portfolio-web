@@ -2,8 +2,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const navList = document.querySelector('.nav-list');
     const langButtons = document.querySelectorAll('.lang-btn');
-    const navLinks = document.querySelectorAll('.nav-list a')
+    const navLinks = document.querySelectorAll('.nav-list a');
 
+    const savedScrollY = localStorage.getItem('scrollPosition');
+    const isLanguageChange = localStorage.getItem('isLanguageChange');
+
+    // Set the scroll position on language change or page load
+    if (savedScrollY) {
+        window.requestAnimationFrame(() => {
+            setTimeout(() => {
+                const scrollOptions = {};
+                if (isLanguageChange === 'true') {
+                    scrollOptions.behavior = 'auto';
+                    localStorage.removeItem('isLanguageChange');
+                } else {
+                    scrollOptions.behavior = 'smooth';
+                }
+
+                window.scrollTo(0, parseInt(savedScrollY), scrollOptions);
+                localStorage.removeItem('scrollPosition');
+            }, 50); 
+        });
+    }
+
+    window.changeLanguage = function(lang) {
+        localStorage.setItem('scrollPosition', window.scrollY);
+        localStorage.setItem('isLanguageChange', 'true');
+
+        let targetPage = '';
+        if (lang === 'es') {
+            targetPage = 'index_es.html';
+        } else {
+            targetPage = 'index.html';
+        }
+
+        window.location.href = targetPage;
+    };
+
+
+    // Set the current year in the footer
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Update the active language button based on the current page
     const getCurrentPageName = () => {
         const path = window.location.pathname;
         const page = path.split('/').pop();
@@ -18,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 button.classList.add('active');
                 found = true;
             } else {
-                button.classList.remove('active')
+                button.classList.remove('active');
             }
         });
         
@@ -45,63 +88,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    langButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const selectedLang = button.dataset.lang;
-            let targetPage = '';
-
-            if (selectedLang === 'es') {
-                targetPage = 'index_es.html'
-            } else {
-                targetPage = 'index.html'
-            }
-
-            window.location.href = targetPage;
-        })
-    })
-
-    // Function to check if text wraps and toggle underline
-    const checkTextWrapping = () => {
-        const sectionTitles = document.querySelectorAll('.section-title');
-        
-        sectionTitles.forEach(title => {
-            // Create a temporary element to measure single-line width
-            const tempElement = document.createElement('span');
-            tempElement.style.cssText = `
-                position: absolute;
-                visibility: hidden;
-                white-space: nowrap;
-                font-size: ${getComputedStyle(title).fontSize};
-                font-family: ${getComputedStyle(title).fontFamily};
-                font-weight: ${getComputedStyle(title).fontWeight};
-                line-height: ${getComputedStyle(title).lineHeight};
-            `;
-            tempElement.textContent = title.textContent;
-            document.body.appendChild(tempElement);
-            
-            const singleLineWidth = tempElement.offsetWidth;
-            const availableWidth = title.offsetWidth;
-            
-            // Remove temp element
-            document.body.removeChild(tempElement);
-            
-            // If text would be wider than available space, it wraps
-            if (singleLineWidth > availableWidth) {
-                title.classList.add('text-wrapped');
-            } else {
-                title.classList.remove('text-wrapped');
-            }
-        });
-    };
-
-    // Check on load and resize
-    checkTextWrapping();
-    window.addEventListener('resize', checkTextWrapping);
-
-    // Update current year in footer
-    const currentYearSpan = document.getElementById('current-year');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-})
+});
