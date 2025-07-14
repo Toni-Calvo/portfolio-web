@@ -463,7 +463,7 @@ ul {
 
 .projects-section {
     padding: 80px 20px;
-    background-color: #253473; /* colores */
+    background-color: #253473;
     text-align: left;
     min-height: 100vh;
 }
@@ -478,7 +478,7 @@ ul {
 }
 
 .project-card {
-    background-color: #5a60d8; /* colores */
+    background-color: #5a60d8;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
@@ -509,21 +509,21 @@ ul {
 
 .project-title {
     font-size: 1.6rem;
-    color: #e0d8cf; /* colores */
+    color: #e0d8cf;
     margin-bottom: 15px;
     line-height: 1.3;
 }
 
 .project-description {
     font-size: 1rem;
-    color: #e0d8cf; /* colores */
+    color: #e0d8cf;
     margin-bottom: 15px;
     line-height: 1.5;
     flex-grow: 1;
 }
 
 .project-tags {
-    color: #e0d8cf; /* colores */
+    color: #e0d8cf;
     padding: 5px 13px;
     border-radius: 4px;
     font-size: 0.85rem;
@@ -534,8 +534,8 @@ ul {
 
 .btn-view-project {
     display: inline-block;
-    background-color: #3498db; /* colores */
-    color: #fff; /* colores */
+    background-color: #3498db;
+    color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     text-align: center;
@@ -545,37 +545,146 @@ ul {
 }
 
 .btn-view-project:hover {
-    background-color: #2980b9; /* colores */
+    background-color: #2980b9;
 }
 
-/* CONTACT */
+/* EDUCATION */
 
-.contact-img {
+.education-section {
+    padding: 80px 20px;
+    background-color: #85a8c1;
+    text-align: left;
+    min-height: 100vh;
+}
+
+.education-section .timeline-item::before {
+    border: 3px solid #85a8c1;
+}
+
+.education-section .timeline-date {
+    color: #2c3e50;
+}
+
+.timeline-grade {
+    font-size: 1.1rem;
+    color: #171e24;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* CONTACT/FOOTER */
+
+.main-footer {
+    background-color: #171e24;
+    color: #e0d8cf;
+    text-align: left;
+    padding: 60px 20px;
+}
+
+.footer-wrapper {
+    max-width: 1250px;
+    margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 20px;
-    padding: 20px;
+    padding: 0 20px;
 }
 
-.contact-img figure {
-    margin: 0;
-    text-align: center;
-    padding: 10px;
+.contact-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.contact-img img {
+.social-icon-btn {
+    display: flex;
+    justify-content: left;
+    align-items: center;
     width: 50px;
-    height: auto;
-    display: block;
+    height: 50px;
+    background-color: transparent;
+    color: #e0d8cf;
+    font-size: 2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.contact-img > a {
-    display: inline-block;
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
+.social-icon-btn:hover {
+    transform: translateY(-5px) scale(1.15);
+    color: #fff;
 }
 
-.contact-img > a:hover {
-    transform: scale(1.1);
+.footer-info {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+/* MOBILE CONTACT/FOOTER */
+
+@media (max-width: 768px) {
+    .main-footer {
+        padding: 40px 15px;
+    }
+    .footer-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .contact-section {
+        margin-top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .contact-info p {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+
+    .social-icon-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .footer-info {
+        text-align: center;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-footer {
+        padding: 30px 10px;
+    }
+
+    .contact-info p {
+        font-size: 0.95rem;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    .social-icon-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .footer-info {
+        font-size: 0.8rem;
+    }
 }

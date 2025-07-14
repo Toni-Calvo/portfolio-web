@@ -98,4 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check on load and resize
     checkTextWrapping();
     window.addEventListener('resize', checkTextWrapping);
+
+    // Update current year in footer
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
 })
