@@ -187,7 +187,17 @@ ul {
 
 /* HOME/HERO SECTION */
 
+#constellationCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
 .hero-section {
+    position: relative;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -206,6 +216,7 @@ ul {
     gap: 40px;
     flex-wrap: nowrap;
     margin-top: -50px;
+    z-index: 1;
 }
 
 .hero-text-wrapper {
